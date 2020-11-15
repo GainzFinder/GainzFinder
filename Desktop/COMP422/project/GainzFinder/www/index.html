@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: ws: 'unsafe-inline' https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/index.css">
+		<!-- Key is removed for github -->
+        <script  src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyAh9Ovz3HoQXMyBEWuSasB0Hd0O3Z55h0I&libraries=places"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="brand"><h1>GainzFinder</h1></div>
+                <div class="searchbox">
+                    <form method="get">
+                        <div class="textbar">
+                            <input type="text" id ="input" class="input">
+                        </div>
+                        <div class="options">
+                            <select class="distance" id="distance">
+                                <option value=5> 5 miles</option>
+                                <option value=5> 10 miles</option>
+                                <option value=5> 20 miles</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                  <div class="numbertext">1 / 3</div>
+                  <img src="./img/hayley-kim-design-eot-ka5dM7Q-unsplash.jpg" style="width:100%">
+                  <div class="text">24 Hours Fitness Center</div>
+                </div>
+                
+                <div class="mySlides fade">
+                  <div class="numbertext">2 / 3</div>
+                  <img src="./img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" style="width:100%">
+                  <div class="text">Chicago Lake Gym</div>
+                </div>
+                
+                <div class="mySlides fade">
+                  <div class="numbertext">3 / 3</div>
+                  <img src="./img/charles-gaudreault-xXofYCc3hqc-unsplash.jpg" style="width:100%">
+                  <div class="text">Gloden Garden Gym</div>
+                </div>
+                
+                </div>
+                <br>
+            <div style="text-align:center">
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+            </div>
+            <div class="runapp"><input type="button" class="letgo" value="Let's go"></div>
+            <div class="menu">
+              <a href="index.html">Home</a>
+              <a href="Search.html">Search</a>
+              <a href="Save.html">Save</a>
+              <a href="profile.html">Profile</a>
+            </div>
+        </div>
+		
+        <script src="cordova.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/slideshow.js"></script>
+    </body>
+</html>
