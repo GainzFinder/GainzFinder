@@ -35,32 +35,29 @@
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
         <link rel="stylesheet" href="css/index.css">
-		<!-- Key is removed for github -->
-        <script  src= "https://maps.googleapis.com/maps/api/js?key=[KEY]&libraries=places"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Day Pass Finder</h1>
-			<form>
-				<input id = "loc" value = "Location">
-				<input id = "cur" type = button value = "Current Location">
-				<span id = "label">Within: </span>
-				<select id = "dis" name="distance">
-					<option value = 5>5 miles</option>
-					<option value = 10>10 miles</option>
-					<option value = 20>20 miles</option>
-				<input id = "find" type = button value = "Find Gyms">
-			</form>
-			<div id = "map"></div>
-			<section id = "gym-output"></section>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
 		
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
+    <body>
+		
+        <h1>API Work</h1><br>
+		<div id="inputs">
+		<input type="text" id="loc" name="loc" placeholder="123 Rep St">
+		<select id = "dis">
+			<option value = "none">-Search Radius-</option>
+			<option value = 1>1 Mile</option>
+			<option value = 5>5 Miles</option>
+			<option value = 10>10 Miles</option>
+			<option value = 15>15 Miles</option>
+		</select>
+		<input type="button" id="search" value="Search">
+		</div>
+		<div id="map"></div>
+		<ul id="output">
+			<li>Test Item</li>
+		</ul>
     </body>
+	
+	<!--Key removed-->
+	<script  src= "https://maps.googleapis.com/maps/api/js?key=API_Key&libraries=places"></script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
 </html>
