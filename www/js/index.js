@@ -59,9 +59,9 @@ function initMap(){
 		center: {lat: 41.8781, lng: -87.6298},
 		zoom: 8,});
 	
-	//add google autocomplete api to the location text bar for addresses
-    var options = {types: ['address']};
-    autocomplete = new google.maps.places.Autocomplete(document.getElementById("loc"), options);
+	//add google autocomplete api to the location text bar
+    //no options allows towns/cities/locations of interest to be used
+	autocomplete = new google.maps.places.Autocomplete(document.getElementById("loc"));
 	service = new google.maps.places.PlacesService(map);
 }
 
