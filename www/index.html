@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Navbars</title>
+        <title>GainzFinder</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -13,8 +13,10 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6oBteqAdUKDrasaeta1CS9-u1ZHEcpqM&callback=initMap&libraries=&v=weekly"
       defer
     ></script>
-        <link rel="stylesheet" type="text/css" href="./src/css/mapStyling.css">
-        <link rel="stylesheet" type="text/css" href="./src/css/Styling.css">
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/mapStyling.css">
+        <link rel="stylesheet" type="text/css" href="./css/styling.css">
         
     </head>
     
@@ -28,9 +30,9 @@
             <div data-role="content" class="ui-content">
                 
                 <div class="fader ui-grid-a" id="imageList">  
-                    <img src="./src/images/charles-gaudreault-xXofYCc3hqc-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%;">
-                    <img src="./src/images/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" alt="">
-                    <img src="./src/images/hayley-kim-design-eot-ka5dM7Q-unsplash.jpg" alt="">
+                    <img src="./img/charles-gaudreault-xXofYCc3hqc-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                    <img src="./img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" alt=""style="max-width: 100%; max-height: 100%;">
+                    <img src="./img/hayley-kim-design-eot-ka5dM7Q-unsplash.jpg" alt=""style="max-width: 100%; max-height: 100%;">
                 </div>
 
                 <div data-role="button" class="ui-grid-a ui-button" id="search-button">
@@ -60,7 +62,7 @@
 
             <div data-role="content" class="ui-content">
                 <div class="photopopup" id="backgroundimage">
-                    <img src="./src/images/danielle-cerullo-CQfNt66ttZM-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%; ">
+                    <img src="./img/danielle-cerullo-CQfNt66ttZM-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%; ">
                 </div>
                 <div class="ui-field-contain">
                     <form>
@@ -116,11 +118,11 @@
         <!--search result-->
         <div data-role="page" id="search-result">
             <div data-role="content" class="ui-content">
-                <div id = "map" style="height: 200px;">
+                <div id = "map" style="height: 300px;">
 
                 </div>
                 <div id="search-result" style="display: flex;">
-                    <img src="./src/images/icons/filled-like (1).png" alt="" style="max-height: 50px; max-width: 50px;">
+                    <img src="./img/icons/filled-like (1).png" alt="" style="max-height: 50px; max-width: 50px;">
                     <p class="gym-name">24 hourse fitness</p>
                     <p class="price">Rate: $18/day</p>
                     <br>
@@ -148,7 +150,7 @@
                 <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-insert="true" data-filter="true" data-filter-placeholder="Search for history" data-mini="true">
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/barbell.png" alt="">
+                        <img src="./img/icons/barbell.png" alt="">
                         <h2>24 Hours Fitness</h2>
                         <p>24hours<br><br>$19.19</p>
                         </a>
@@ -156,7 +158,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/dumbbell.png" alt="">
+                        <img src="./img/icons/dumbbell.png" alt="">
                         <h2>Chicago Laker Fintness</h2>
                         <p>9am-11pm<br><br>$15.14</p>
                         </a>
@@ -164,7 +166,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/gym (1).png" alt="">
+                        <img src="./img/icons/gym (1).png" alt="">
                         <h2>Muscle Up</h2>
                         <p>9am-11pm<br><br>$15.99</p>
                         </a>
@@ -172,7 +174,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/gym.png" alt="">
+                        <img src="./img/icons/gym.png" alt="">
                         <h2>Chicago Golden Street Gym</h2>
                         <p>9am-11pm<br><br>$18.14</p>
                         </a>
@@ -180,7 +182,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/weightlifting (1).png" alt="">
+                        <img src="./img/icons/weightlifting (1).png" alt="">
                         <h2>River North Fitness</h2>
                         <p>9am-11pm<br><br>$21.14</p>
                         </a>
@@ -188,7 +190,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/weightlifting.png" alt="">
+                        <img src="./img/icons/weightlifting.png" alt="">
                         <h2>Loyola University Gym</h2>
                         <p>9am-11pm<br><br>$18.14</p>
                         </a>
@@ -223,7 +225,7 @@
             <div data-role="content" class="ui-content">
                 <ul data-role="listview" data-filter="true" data-ajax="false" data-insert="false" data-theme="a">
                     <li><a href="#personal-information">Personal Information</a></li>
-                    <li><a href="#account-setting">Account Setting</a></li>
+                    <li><a href="#login-page">Sign in/out</a></li>
                     <li><a href="#user-archive">Archive</a></li>
                     <li><a href="#user-purhchase">Purchase</a></li>
                 </ul>
@@ -270,10 +272,17 @@
             </form>
         </div>
         <!--account setting-->
-        <div data-role="page" id="account-setting" data-theme="a">
-            <div data-role="header" style="font-size: 4vw; font-weight: bold; text-align: center;"><h1>Account Setting</h1></div>
+        <div data-role="page" id="login-page" data-theme="a">
+            <div data-role="header" style="font-size: 4vw; font-weight: bold; text-align: center;"><h1>Login/SignUp</h1></div>
             <div data-role="main">
-
+                <label for="email"></label><input type="email" placeholder="email" id="email"/>
+                <label for="password"></label><input type="password" placeholder="password" id="password"/>
+        
+                <button onclick="signUp()" id="signUp"> Sign up </button>
+                <button onclick="signIn()" id="signIn"> Sign In </button>
+                <form action="">
+                    <a href="#" data-rel="back" style="text-decoration: none;"><input type="button" value="Return"></a>
+                </form>
             </div>
         </div>
 
@@ -286,7 +295,7 @@
                 <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-insert="true" data-filter="true" data-filter-placeholder="Search for history" data-mini="true">
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/barbell.png" alt="">
+                        <img src="./img/icons/barbell.png" alt="">
                         <h2>24 Hours Fitness</h2>
                         <p>24hours<br><br>$19.19</p>
                         </a>
@@ -294,7 +303,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/dumbbell.png" alt="">
+                        <img src="./img/icons/dumbbell.png" alt="">
                         <h2>Chicago Laker Fintness</h2>
                         <p>9am-11pm<br><br>$15.14</p>
                         </a>
@@ -302,7 +311,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/gym (1).png" alt="">
+                        <img src="./img/icons/gym (1).png" alt="">
                         <h2>Muscle Up</h2>
                         <p>9am-11pm<br><br>$15.99</p>
                         </a>
@@ -310,7 +319,7 @@
                     </li>
                     <li>
                         <a href="#">
-                        <img src="./src/images/icons/gym.png" alt="">
+                        <img src="./img/icons/gym.png" alt="">
                         <h2>Chicago Golden Street Gym</h2>
                         <p>9am-11pm<br><br>$18.14</p>
                         </a>
@@ -334,15 +343,16 @@
         </div>
 
         <!--logout-->
-        <div data-rel="page" id="user-logout" data-theme="a">
+        <!-- <div data-rel="page" id="user-logout" data-theme="a">
             <div data-role="content">
                 <a href="" style="font-size: 4vw; font-weight: bold; text-align: center;">Sign in</a>
             </div>
-        </div>
+        </div> -->
 
 
-        <script src="./src/js/responsivePage.js"></script>
-        <script src="./src/js/imageFadder.js"></script>
-        <script src="./src/js/search.js"></script>
+        <script src="./js/responsivePage.js"></script>
+        <script src="./js/imageFadder.js"></script>
+        <script src="./js/search.js"></script>
+        <script src="./js/firebase.js"></script>
     </body>
 </html>
