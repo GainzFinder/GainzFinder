@@ -20,38 +20,37 @@
 
 html, body{
 	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
 
-h1 {
-	margin: 0px;
-	padding: 0px;
-    font-size:24px;
-    font-weight:normal;
-    text-align:center;
-	height: auto;
+.brand{
+    font-size: 10vw;
+    font-weight: bold;
+	text-align: center;
 }
 
 #inputs{
 	margin: 0px;
 	padding-bottom: 2%;
-	display: flex;
-	flex-wrap: wrap;
+	display: flex-wrap;
 	flex-direction: row;
+	justify-content: center;
 }
 
 #loc{
 	margin: 3%;
-	
+	flex: 60%;
 }
 
 #dis{
 	margin: 3%;
-	
+	flex: 20%;
 }	
 #search{
 	margin: 3%;
+	flex: 20%;
 }
 
 #map{
@@ -62,6 +61,35 @@ h1 {
 
 #output{
 	display: none;
+}
+
+footer{
+	background-color: #333333;
+	
+}
+
+.links{
+	margin: auto;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.links li {
+	float: left;
+ 
+}
+
+.links li a {
+	color: white;
+	text-align: center;
+	padding: 35px;
+	text-decoration: none;
+}
+
+.links li a:active {
+	background-color: #111111;
 }
 
 
