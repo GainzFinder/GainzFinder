@@ -1,348 +1,353 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Navbars</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-        <script src="./src/search.js"></script>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6oBteqAdUKDrasaeta1CS9-u1ZHEcpqM&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
-        <link rel="stylesheet" type="text/css" href="./css/mapStyling.css">
-        <link rel="stylesheet" type="text/css" href="./css/styling.css">
-        
-    </head>
-    
-    <body class="ui-mobile-viewport">
-        
-        <!--Home page-->
-        <div data-role="page" id="home" data-theme="a" data-position="fixed">
-            <div data-role="header" data-position="fixed" data-theme="a" data-position="fixed">
-                <h1 class="brand">GainzFinder</h1> 
-            </div>
-            <div data-role="content" class="ui-content">
-                
-                <div class="fader ui-grid-a" id="imageList">  
-                    <img src="./img/" alt="" style="max-width: 100%; max-height: 100%;">
-                    <img src="./img/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" alt="">
-                    <img src="./img/hayley-kim-design-eot-ka5dM7Q-unsplash.jpg" alt="">
-                </div>
+<head>
+    <title>GainzFinder</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6oBteqAdUKDrasaeta1CS9-u1ZHEcpqM&callback=initMap&libraries=&v=weekly" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/mapStyling.css">
+    <link rel="stylesheet" type="text/css" href="./css/styling.css">
+</head>
 
-                <div data-role="button" class="ui-grid-a ui-button" id="search-button">
-                    <a class="ui-grid-solo" href="#search"><input type="submit" id="search-confirm" value="Let's Go" class="ui-btn-active"></a>
-                </div>
+<body class="ui-mobile-viewport">
 
-            </div>
-            
-            <div data-role="footer" data-position="fixed" class="footer">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#home" data-transition="pop" data-icon="home" class="ui-btn-active ui-state-persist" >Home</a></li>
-                        <li><a href="#search" data-transition="pop" data-icon="search" >Search</a></li>
-                        <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
-                        <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!--Home page-->
-        
-        
-        <!--Search page-->
-        <div data-role="page" id="search" data-theme="a" data-position="fixed"> 
-            <div data-role="header" data-position="fixed">
-                <h1 class="brand">GainzFinder</h1>
+    <!--Home page-->
+    <div data-role="page" id="home" data-theme="a" data-position="fixed">
+        <div data-role="header" data-position="fixed" data-theme="a" data-position="fixed">
+            <h1 class="brand">GainzFinder</h1>
+        </div>
+        <div data-role="content" class="ui-content">
+
+            <div class="fader ui-grid-a" id="imageList">
+                <img src="/images/charles-gaudreault-xXofYCc3hqc-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%;">
+                <img src="/images/edgar-chaparro-sHfo3WOgGTU-unsplash.jpg" alt="">
+                <img src="/images/hayley-kim-design-eot-ka5dM7Q-unsplash.jpg" alt="">
             </div>
 
-            <div data-role="content" class="ui-content">
-                <div class="photopopup" id="backgroundimage">
-                    <img src="./img/danielle-cerullo-CQfNt66ttZM-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%; ">
-                </div>
-                <div class="ui-field-contain">
-                    <form>
-                        <label for="search-home-gym" data-type="horizontal">
-                            <input type="search" name="search-text" id="search-text" data-mini="true" placeholder="e.g. 24 hours fitness center">
-                            <a href="#search-result" style="text-decoration: none;"><input type="button" name="search-button" id="search-button" data-mini="true" value="Search"></a>
-                        </label>
-                    </form>
-                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <select name="select-native-fc" id="select-distance">
-                            <option value="5"> 5 miles</option>
-                            <option value="10"> 10 miles</option>
-                            <option value="15"> 15 miles</option>
-                            <option value="20"> 20 miles</option>
-                        </select>
-                        <select name="select-native-fc" id="select-price">
-                            <option value="15"> less $15</option>
-                            <option value="15"> less $20</option>
-                            <option value="15"> less $30</option>
-                            <option value="15"> less $50</option>
-                        </select>
-                        <select name="select-native-fc" id="select-time">
-                            <option value="6"> 6am - 11pm</option>
-                            <option value="9"> 9am - 11pm</option>
-                            <option value="10"> 10am - 11pm</option>
-                            <option value="24"> 24 hours</option>
-                        </select>
-                    </fieldset>
-                    <div class="recommendations">
-                        <h2 data-mini="true">Recommendations:</h2>
-                        <ul data-role="listview" data-mini="true">
-                            <li><a href="">24 Hours Gym</a></li>
-                            <li><a href="">Laker Gym</a></li>
-                            <li><a href="">Loyola Gym</a></li>
-                            <li><a href="">Chicago Gym</a></li>
-                        </ul>
-                    </div>
-                </div>
+            <div data-role="button" class="ui-grid-a ui-button" id="search-button">
+                <a class="ui-grid-solo" href="#search"><input type="submit" id="search-confirm" value="Let's Go" class="ui-btn-active"></a>
             </div>
 
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#home" data-transition="pop" data-icon="home" >Home</a></li>
-                        <li><a href="#search" data-transition="pop" data-icon="search" class="ui-btn-active ui-state-persist">Search</a></li>
-                        <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
-                        <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div><!--Search page-->
-        <!--search result-->
-        <div data-role="page" id="search-result">
-            <div data-role="content" class="ui-content">
-                <div id = "map" style="height: 200px;">
+        </div>
 
-                </div>
-                <div id="search-result" style="display: flex;">
-                    <img src="./img/icons/filled-like (1).png" alt="" style="max-height: 50px; max-width: 50px;">
-                    <p class="gym-name">24 hourse fitness</p>
-                    <p class="price">Rate: $18/day</p>
-                    <br>
-                    <input type="checkbox" data-icon="">
-                </div>
+        <div data-role="footer" data-position="fixed" class="footer">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-transition="pop" data-icon="home" class="ui-btn-active ui-state-persist" >Home</a></li>
+                    <li><a href="#search" data-transition="pop" data-icon="search" >Search</a></li>
+                    <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
+                    <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
+                </ul>
             </div>
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#home" data-transition="pop" data-icon="home" >Home</a></li>
-                        <li><a href="#search" data-transition="pop" data-icon="search" class="ui-btn-active ui-state-persist">Search</a></li>
-                        <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
-                        <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
+        </div>
+    </div><!--Home page-->
+
+
+    <!--Search page-->
+    <div data-role="page" id="search" data-theme="a" data-position="fixed">
+        <div data-role="header" data-position="fixed">
+            <h1 class="brand">GainzFinder</h1>
+        </div>
+
+        <div data-role="content" class="ui-content">
+            <div class="photopopup" id="backgroundimage">
+                <img src="/images/danielle-cerullo-CQfNt66ttZM-unsplash.jpg" alt="" style="max-width: 100%; max-height: 100%; ">
+            </div>
+            <div class="ui-field-contain">
+                <form>
+                    <label for="search-home-gym" data-type="horizontal">
+                        <input type="search" name="search-text" id="search-text" data-mini="true" placeholder="e.g. 24 hours fitness center">
+                        <a href="#search-result" style="text-decoration: none;"><input type="button" name="search-button" id="search-button" data-mini="true" value="Search"></a>
+                    </label>
+                </form>
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <select name="select-native-fc" id="select-distance">
+                        <option value="5"> 5 miles</option>
+                        <option value="10"> 10 miles</option>
+                        <option value="15"> 15 miles</option>
+                        <option value="20"> 20 miles</option>
+                    </select>
+                    <select name="select-native-fc" id="select-price">
+                        <option value="15"> less $15</option>
+                        <option value="15"> less $20</option>
+                        <option value="15"> less $30</option>
+                        <option value="15"> less $50</option>
+                    </select>
+                    <select name="select-native-fc" id="select-time">
+                        <option value="6"> 6am - 11pm</option>
+                        <option value="9"> 9am - 11pm</option>
+                        <option value="10"> 10am - 11pm</option>
+                        <option value="24"> 24 hours</option>
+                    </select>
+                </fieldset>
+                <div class="recommendations">
+                    <h2 data-mini="true">Recommendations:</h2>
+                    <ul data-role="listview" data-mini="true">
+                        <li><a href="">24 Hours Gym</a></li>
+                        <li><a href="">Laker Gym</a></li>
+                        <li><a href="">Loyola Gym</a></li>
+                        <li><a href="">Chicago Gym</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!--Save page-->
-        <div data-role="page" id="save" data-theme="a">
-            <div role-data="header" data-position="fixed">
-                <h1 class="brand">History</h1>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-transition="pop" data-icon="home" >Home</a></li>
+                    <li><a href="#search" data-transition="pop" data-icon="search" class="ui-btn-active ui-state-persist">Search</a></li>
+                    <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
+                    <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
+                </ul>
             </div>
-            <div role-data="content" class="ui-content">
-                <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-insert="true" data-filter="true" data-filter-placeholder="Search for history" data-mini="true">
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/barbell.png" alt="">
+        </div>
+
+    </div><!--Search page-->
+    <!--search result-->
+    <div data-role="page" id="search-result">
+        <div data-role="content" class="ui-content">
+            <div id = "map" style="height: 200px;">
+
+            </div>
+            <div id="search-result" style="display: flex;">
+                <img src="/images/icons/filled-like (1).png" alt="" style="max-height: 50px; max-width: 50px;">
+                <p class="gym-name">24 hourse fitness</p>
+                <p class="price">Rate: $18/day</p>
+                <br>
+                <input type="checkbox" data-icon="">
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-transition="pop" data-icon="home" >Home</a></li>
+                    <li><a href="#search" data-transition="pop" data-icon="search" class="ui-btn-active ui-state-persist">Search</a></li>
+                    <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
+                    <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--Save page-->
+    <div data-role="page" id="save" data-theme="a">
+        <div role-data="header" data-position="fixed">
+            <h1 class="brand">History</h1>
+        </div>
+        <div role-data="content" class="ui-content">
+            <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-insert="true" data-filter="true" data-filter-placeholder="Search for history" data-mini="true">
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/barbell.png" alt="">
                         <h2>24 Hours Fitness</h2>
                         <p>24hours<br><br>$19.19</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/dumbbell.png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/dumbbell.png" alt="">
                         <h2>Chicago Laker Fintness</h2>
                         <p>9am-11pm<br><br>$15.14</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/gym (1).png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/gym (1).png" alt="">
                         <h2>Muscle Up</h2>
                         <p>9am-11pm<br><br>$15.99</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/gym.png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/gym.png" alt="">
                         <h2>Chicago Golden Street Gym</h2>
                         <p>9am-11pm<br><br>$18.14</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/weightlifting (1).png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/weightlifting (1).png" alt="">
                         <h2>River North Fitness</h2>
                         <p>9am-11pm<br><br>$21.14</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/weightlifting.png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/weightlifting.png" alt="">
                         <h2>Loyola University Gym</h2>
                         <p>9am-11pm<br><br>$18.14</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+            </ul>
+            <div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width: 200px; padding-bottom: 2em;">
+                <h3>Purchase Premium</h3>
+                <p>Your purchase will begin immediately on your mobile device when you purchase</p>
+                <!--TODO need to connect with our database or website-->
+                <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-btn-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Buy: $12.99</a>
+                <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel </a>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-transition="popup" data-icon="home" >Home</a></li>
+                    <li><a href="#search" data-transition="pop" data-icon="search" >Search</a></li>
+                    <li><a href="#save" data-transition="pop" data-icon="history" class="ui-btn-active ui-state-persist">Save</a></li>
+                    <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
                 </ul>
-                <div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width: 200px; padding-bottom: 2em;">
-                    <h3>Purchase Premium</h3>
-                    <p>Your purchase will begin immediately on your mobile device when you purchase</p>
-                    <!--TODO need to connect with our database or website-->
-                    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-btn-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Buy: $12.99</a>
-                    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel </a>
-                </div>
             </div>
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#home" data-transition="popup" data-icon="home" >Home</a></li>
-                        <li><a href="#search" data-transition="pop" data-icon="search" >Search</a></li>
-                        <li><a href="#save" data-transition="pop" data-icon="history" class="ui-btn-active ui-state-persist">Save</a></li>
-                        <li><a href="#profile" data-transition="pop" data-icon="user" >Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div><!--Save page-->
-        
-        <!--Profile page-->
-        <div data-role="page" id="profile" data-theme="a">
-            <div class ="header" data-mini="true" data-role="header" data-position="fixed" style="display: flex; text-align: center; padding: 5px 0 5px 15px;">
-                <h3 style="font-size: 4vw; font-weight: bold; text-align: center;">Tribbiania Yu Jia </h3>
-            </div>
-            <div data-role="content" class="ui-content">
-                <ul data-role="listview" data-filter="true" data-ajax="false" data-insert="false" data-theme="a">
-                    <li><a href="#personal-information">Personal Information</a></li>
-                    <li><a href="#account-setting">Account Setting</a></li>
-                    <li><a href="#user-archive">Archive</a></li>
-                    <li><a href="#user-purhchase">Purchase</a></li>
-                </ul>
-                <a href="#user-logout" style="text-decoration: none;"><input type="button" value="Logout"></a>
-            </div>
+        </div>
+    </div><!--Save page-->
 
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#home" data-transition="pop" data-icon="home" >Home</a></li>
-                        <li><a href="#search" data-transition="pop" data-icon="search" >Search</a></li>
-                        <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
-                        <li><a href="#profile" data-transition="pop" data-icon="user" class="ui-btn-active ui-state-persist">Profile</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div><!--Profile page-->
-        
-        <!--personal information-->
-        <div data-role="page" id="personal-information" data-theme="a">
-            <form action="get">
-                <ul data-role="listview" data-insert="true" data-mini="true">
-                    <li data-role="list-divider" style="font-size: 4vw; font-weight: bold; text-align: center;">Personal Information</li>
-                    <li class="ui-field-contain">
-                        <label for="user-name">User Name:</label>
-                        <input type="text" name="user-name" id="user-name" value="" data-clear-btn="true" placeholder="Joey">
-                    </li>
-                    <li class="ui-field-contain">
-                        <label for="Gender">Gender</label>
-                        <input type="text" name="user-gender" id="user-gender" value="" data-clear-btn="true" placeholder="female">
-                    </li>
-                    <li class="ui-field-contain">
-                        <label for="user-phone">Phone Number:</label>
-                        <input type="text" name="user-phone" id="user-pohone" value="" data-clear-btn="true" placeholder="+123456789">
-                    </li>
-                    <li class="ui-field-contain">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="+yjia0405@gmail.com">
-                    </li>
+    <!--Profile page-->
+    <div data-role="page" id="profile" data-theme="a">
+        <div class ="header" data-mini="true" data-role="header" data-position="fixed" style="display: flex; text-align: center; padding: 5px 0 5px 15px;">
+            <h3 style="font-size: 4vw; font-weight: bold; text-align: center;"> Information </h3>
+        </div>
+        <div data-role="content" class="ui-content">
+            <ul data-role="listview" data-filter="true" data-ajax="false" data-insert="false" data-theme="a">
+                <li><a href="#personal-information">Personal Information</a></li>
+                <li><a href="#login-page">Login/SignUp Page</a></li>
+                <li><a href="#user-archive">Archive</a></li>
+                <li><a href="#user-purhchase">Purchase</a></li>
+            </ul>
+
+            <button onclick="signOut()" id="signOut"> Sign Out </button>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-transition="pop" data-icon="home" >Home</a></li>
+                    <li><a href="#search" data-transition="pop" data-icon="search" >Search</a></li>
+                    <li><a href="#save" data-transition="pop" data-icon="history" >Save</a></li>
+                    <li><a href="#profile" data-transition="pop" data-icon="user" class="ui-btn-active ui-state-persist">Profile</a></li>
                 </ul>
-                <a href="#" data-rel="back" style="text-decoration: none;"><input type="button" value="Cancel"></a>
-                <a href="#" data-rel="back" style="text-decoration: none;"><input type="submit" value="Save"></a>
+            </div>
+        </div>
+
+    </div><!--Profile page-->
+
+    <!--personal information-->
+    <div data-role="page" id="personal-information" data-theme="a">
+        <form action="get">
+            <ul data-role="listview" data-insert="true" data-mini="true">
+                <li data-role="list-divider" style="font-size: 4vw; font-weight: bold; text-align: center;">Personal Information</li>
+                <li class="ui-field-contain">
+                    <label for="user-name">User Name:</label>
+                    <input type="text" name="user-name" id="user-name" value="" data-clear-btn="true" placeholder="Joey">
+                </li>
+                <li class="ui-field-contain">
+                    <label for="Gender">Gender</label>
+                    <input type="text" name="user-gender" id="user-gender" value="" data-clear-btn="true" placeholder="female">
+                </li>
+                <li class="ui-field-contain">
+                    <label for="user-phone">Phone Number:</label>
+                    <input type="text" name="user-phone" id="user-pohone" value="" data-clear-btn="true" placeholder="+123456789">
+                </li>
+            </ul>
+            <a href="#" data-rel="back" style="text-decoration: none;"><input type="button" value="Cancel"></a>
+            <a href="#" data-rel="back" style="text-decoration: none;"><input type="submit" value="Save"></a>
+        </form>
+    </div>
+    <!--Login/SignUp setting-->
+    <div data-role="page" id="login-page" data-theme="a">
+        <div data-role="header" style="font-size: 4vw; font-weight: bold; text-align: center;"><h1>Login/SignUp</h1></div>
+        <div data-role="main">
+            <label for="email"></label><input type="email" placeholder="email" id="email"/>
+            <label for="password"></label><input type="password" placeholder="password" id="password"/>
+
+            <button onclick="signUp()" id="signUp"> Sign up </button>
+            <button onclick="signIn()" id="signIn"> Sign In </button>
+            <form action="">
+                <a href="#" data-rel="back" style="text-decoration: none;"><input type="button" value="Return"></a>
             </form>
         </div>
-        <!--account setting-->
-        <div data-role="page" id="account-setting" data-theme="a">
-            <div data-role="header" style="font-size: 4vw; font-weight: bold; text-align: center;"><h1>Account Setting</h1></div>
-            <div data-role="main">
+    </div>
 
+    <!--Archive-->
+    <div data-role="page" id="user-archive" data-theme="a">
+        <div role-data="content">
+            <div class="header">
+                <h1 style="font-size: 4vw; font-weight: bold; text-align: center;">Archive</h1>
             </div>
-        </div>
-
-        <!--Archive-->
-        <div data-role="page" id="user-archive" data-theme="a">
-            <div role-data="content">
-                <div class="header">
-                    <h1 style="font-size: 4vw; font-weight: bold; text-align: center;">Archive</h1>
-                </div>
-                <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-insert="true" data-filter="true" data-filter-placeholder="Search for history" data-mini="true">
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/barbell.png" alt="">
+            <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-insert="true" data-filter="true" data-filter-placeholder="Search for history" data-mini="true">
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/barbell.png" alt="">
                         <h2>24 Hours Fitness</h2>
                         <p>24hours<br><br>$19.19</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/dumbbell.png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/dumbbell.png" alt="">
                         <h2>Chicago Laker Fintness</h2>
                         <p>9am-11pm<br><br>$15.14</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/gym (1).png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/gym (1).png" alt="">
                         <h2>Muscle Up</h2>
                         <p>9am-11pm<br><br>$15.99</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                        <img src="./img/icons/gym.png" alt="">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/icons/gym.png" alt="">
                         <h2>Chicago Golden Street Gym</h2>
                         <p>9am-11pm<br><br>$18.14</p>
-                        </a>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
-                    </li>
-                    
-                </ul>
-                <form action="">
-                    <a href="#" data-rel="back" style="text-decoration: none;"><input type="button" value="Return"></a>
-                </form>
-            </div>
-        </div>
-        <!--purchase unfinished-->
-        <div data-role="page" id="user-purchase" data-theme="a">
-            <div data-role="header">
-                <h1 style="font-size: 4vw; font-weight: bold; text-align: center;">Purchase</h1>
-            </div>
-            <div data-role="content">
+                    </a>
+                    <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase Premium</a>
+                </li>
 
-            </div>
+            </ul>
+            <form action="">
+                <a href="#" data-rel="back" style="text-decoration: none;"><input type="button" value="Return"></a>
+            </form>
         </div>
+    </div>
+    <!--purchase unfinished-->
+    <div data-role="page" id="user-purchase" data-theme="a">
+        <div data-role="header">
+            <h1 style="font-size: 4vw; font-weight: bold; text-align: center;">Purchase</h1>
+        </div>
+        <div data-role="content">
 
-        <!--logout-->
-        <div data-rel="page" id="user-logout" data-theme="a">
+        </div>
+    </div>
+
+    <!--logout-->
+        <!-- <div data-rel="page" id="user-logout" data-theme="a">
             <div data-role="content">
                 <a href="" style="font-size: 4vw; font-weight: bold; text-align: center;">Sign in</a>
             </div>
-        </div>
+        </div> -->
+
+<script src="./js/firebase.js"></script>
+<script src="./js/responsivePage.js"></script>
+<script src="./js/imageFadder.js"></script>
+<script src="./js/search.js"></script>
 
 
-        <script src="./js/responsivePage.js"></script>
-        <script src="./js/imageFadder.js"></script>
-        <script src="./js/search.js"></script>
-    </body>
+</body>
 </html>
